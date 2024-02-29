@@ -1,15 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Search() {
+function Search({ onSearch }) {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+    onSearch(e.target.value.toLowerCase());
+  };
+
   return (
     <div className="searchbar">
-      <label htmlFor="search">Search Plants:</label>
-      <input
-        type="text"
-        id="search"
-        placeholder="Type a name to search..."
-        onChange={(e) => console.log("Searching...")}
-      />
+      <label>Search by Plant Name:
+        <input type="text" value={searchTerm} onChange={handleChange} />
+      </label>
+      
     </div>
   );
 }
