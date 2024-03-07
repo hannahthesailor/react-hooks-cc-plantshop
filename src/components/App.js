@@ -6,49 +6,27 @@ function App() {
   const [plants, setPlants] = useState([]);
 
   useEffect(() => {
-    fetchPlants();
+    fetch("http://localhost:6001/plants")
+     .then(response => response.json())
+     .then(plantData => setPlants(plantData))
   }, []);
 
-  const fetchPlants = async () => {
-    try {
-      const response = await fetch("http://localhost:6001/plants");
-      const data = await response.json();
-      setPlants(data);
-    } catch (error) {
-      console.error("Error fetching plants:", error);
-    }
-  };
-
-  const handleAddPlant = async (newPlantData) => {
-    try {
-      console.log("Adding plant:", newPlantData);
-  
-      newPlantData.price = parseFloat(newPlantData.price);
-  
-      const response = await fetch("http://localhost:6001/plants", {
-        method: "POST",
-        headers: {
-          "Content-Type": "Application/JSON",
-        },
-        body: JSON.stringify(newPlantData),
-      });
-  
-      if (!response.ok) {
-        console.error("Failed to add plant. Status:", response.status);
-        return;
-      }
-  
-      const data = await response.json();
-      console.log("New plant added:", data);
-  
-      await fetchPlants();
-    } catch (error) {
-      console.error("Error adding plant:", error);
-    }
-  };
-  
-  
-
+  function handleAddPlant(newPlantData) {
+    fetch('http://localhost:6001/plants', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'Application/JSON'
+      },
+      body: JSON.stringify(newPlantData)
+    })
+    .then(response => response.json())
+    .then(newPlant => {
+      setPlants(currentPlants => [...currentPlants, newPlant]);
+    })
+    .catch(error => {
+      console.error('Error adding plant:', error);
+    });
+  }
   
 
   return (
