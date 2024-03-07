@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 
 function PlantCard({ plant }) {
-  const [inStock, setInStock] = useState(true);
+  const [inStock, setInStock] = useState(plant.inStock !== false);
 
   const handleClick = () => {
     setInStock((prevStock) => !prevStock);
   };
 
+  const formattedPrice = typeof plant.price === "number" ? plant.price : "N/A";
+
   return (
     <li className="card" data-testid="plant-item">
       <img src={plant.image} alt={plant.name} />
       <h4>{plant.name}</h4>
-      <p>Price: {plant.price.toFixed(2)}</p>
+      <p>Price: {formattedPrice}</p>
       {inStock ? (
         <button className="primary" onClick={handleClick}>
           In Stock

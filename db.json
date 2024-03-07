@@ -42,6 +42,12 @@
       "name": "Fiddle Leaf Fig",
       "image": "./images/fiddle-leaf-fig.jpg",
       "price": 55
+    },
+    {
+      "name": "Fern",
+      "image": "https://bkimgcdnprd.pearl.design/E7_52LZqJwXRky-bwbqrAMwBIMg=/920x920/https://storage.googleapis.com/mine-production/media/ef168a10-7435-48ba-90a7-1b97e6a76034.jpeg?",
+      "price": 13.99,
+      "id": 8
     }
   ]
 }

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-import NewPlantForm from "./NewPlantForm";
-import PlantList from "./PlantList";
-import Search from "./Search";
+// PlantPage.js
 
-function PlantPage({ plants }) {
+import React, { useEffect, useState } from 'react';
+import NewPlantForm from './NewPlantForm';
+import PlantList from './PlantList';
+import Search from './Search';
+
+function PlantPage({ plants, onAddPlant }) {
   const [filteredPlants, setFilteredPlants] = useState(plants);
 
   useEffect(() => {
@@ -11,15 +13,17 @@ function PlantPage({ plants }) {
   }, [plants]);
 
   const handleSearch = (searchTerm) => {
+    const lowercasedSearchTerm = searchTerm.toLowerCase();
     const filtered = plants.filter((plant) =>
-      plant.name.toLowerCase().includes(searchTerm)
+      plant.name.toLowerCase().includes(lowercasedSearchTerm)
     );
+    console.log('Filtered plants:', filtered);
     setFilteredPlants(filtered);
   };
 
   return (
     <main>
-      <NewPlantForm />
+      <NewPlantForm onAddPlant={onAddPlant} />
       <Search onSearch={handleSearch} />
       <PlantList plants={filteredPlants} />
     </main>
