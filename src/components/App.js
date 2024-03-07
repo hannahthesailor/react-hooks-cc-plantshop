@@ -23,7 +23,6 @@ function App() {
     try {
       console.log("Adding plant:", newPlantData);
   
-      // Convert the price to a number before sending it to the server
       newPlantData.price = parseFloat(newPlantData.price);
   
       const response = await fetch("http://localhost:6001/plants", {

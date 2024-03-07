@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 function Search({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const handleChange = (e) => {
-    const lowercaseSearchTerm = e.target.value.toLowerCase();
+  const handleChange = (event) => {
+    const lowercaseSearchTerm = event.target.value.toLowerCase();
     setSearchTerm(lowercaseSearchTerm);
     onSearch(lowercaseSearchTerm);
   };
